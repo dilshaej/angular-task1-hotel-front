@@ -1,0 +1,32 @@
+<!-- <pre>{{hotel | json}}</pre> -->
+<h1 class="text-center mt-3">Edit Hotel Details</h1>
+<div class="container w-25">  
+    <form #addUserForm="ngForm"  class=" mt-5  p-3 rounded">
+        <div class="form-floating mb-3">
+            <input #id="ngModel" name="id" [(ngModel)]="hotel.id"  type="text" class="form-control" id="floatingInputID" placeholder=" ID" pattern="[a-zA-Z0-9]*" required readonly>
+            <label for="floatingInputID">ID</label>
+        </div>
+        <div *ngIf="id.invalid && id.touched" class="mb-3 text-danger fw-bolder">*Invalid ID</div>
+        <div class="form-floating mb-3">
+            <input #name="ngModel" name="name" [(ngModel)]="hotel.name" type="text" class="form-control" id="floatingInputName" placeholder=" Name" pattern="[a-zA-Z]*" required>
+            <label for="floatingInputName"> Name</label>
+        </div>
+        <div *ngIf="name.invalid && name.touched" class="mb-3 text-danger fw-bolder">*Invalid  Name</div>
+    
+        <div class="form-floating mb-3">
+            <input #name="ngModel" name="city" [(ngModel)]="hotel.city" type="text" class="form-control" id="floatingInputcity" placeholder="City"  required>
+            <label for="floatingInputcity"> City</label>
+        </div>
+    
+        <div class="form-floating mb-3">
+            <input #name="ngModel" name="starts" [(ngModel)]="hotel.stars" type="text" class="form-control" id="floatingInputstars" placeholder="Stars"  required>
+            <label for="floatingInputstars"> Stars</label>
+        </div>
+        
+        <div class="d-flex">
+            <button (click)="update()" [disabled]="addUserForm.invalid"  class="btn btn-success">Update</button>
+            <button (click)="cancel(hotel.id)"  class="btn btn-primary ms-3">Cancel</button>
+        </div>
+    
+    </form>
+</div>

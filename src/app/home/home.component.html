@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-between mt-5 container">
+    <h1 class="fw-bolder">Hotel List</h1>
+    <button routerLink="/add" class="btn btn-danger"><i class="fa-solid fa-hotel"></i> Add Hotel</button>
+  </div>
+  <div class=" container d-flex justify-content-between mt-4">
+    <div class="d-flex align-items-center">
+      <span class="fw-bolder">Search : </span>
+      <!-- <input  style="width: 500px;" type="text" clsss="form-control ms-3" placeholder="Search By City"> -->
+      <input [(ngModel)]="searchKey" style="width: 500px;" type="search" class="form-control ms-3" id="floatingInput" placeholder="Search By City">
+     
+    </div>
+    
+   
+   
+  </div>
+  <div class="mt-3 container border shadow bg-light">
+    <table class="table">
+  <thead>
+    <tr >
+      <th>#</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>City</th>
+      <th>Stars</th>
+      <th>...</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hotel of allHotels | search : searchKey | paginate: {itemsPerPage: 4,currentPage: p}; let i= index;" >
+      <td>{{i+1}}</td>
+      <td>{{hotel.id}}</td>
+      <td>{{hotel.name}}</td>
+      <td>{{hotel.city}}</td>
+      <td>{{hotel.stars}}</td>
+      <td>
+        <button routerLink="/{{hotel.id}}/edit" class="btn text-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button (click)="remove(hotel.id)"  class="btn text-danger"><i class="fa-solid fa-trash"></i></button>
+  
+      </td>
+    </tr>
+    <tr *ngIf="(allHotels | search : searchKey).length==0">
+      <p class="fw-bolder text-danger">City not found!!!</p>
+    </tr>
+  </tbody>
+    </table>
+    <div class="mt-2 text-center">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+ 
+  </div>
